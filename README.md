@@ -105,11 +105,20 @@ sudo umount disk_mnt
 Step 3. Run! 
 ```
 cd ~/Desktop/comparch/arm-gem5-rsk/parsec_rcs
-bash gen_rcs.sh -i simsmall -p <pkgname> -i <simsmall/simmedium/simlarge> -n <nth>
+bash gen_rcs.sh -p <pkgname> -i <simsmall/simmedium/simlarge> -n <nth>
+cd ~/Desktop/comparch/gem5
 ./build/ARM/gem5.opt -d fs_results/<benchmark> configs/example/arm/starter_fs.py --cpu="hpi" --num-cores=1 --disk-image=$M5_PATH/disks/expanded-linaro-minimal-aarch64.img --script=../arm-gem5-rsk/parsec_rcs/<benchmark>.rcS
 ```
 Example:
 ```
-bash gen_rcs.sh -i simsmall -p canneal -i simsmall -n 4
+cd ~/Desktop/comparch/arm-gem5-rsk/parsec_rcs
+bash gen_rcs.sh -i simsmall -p canneal -n 4
+cd ~/Desktop/comparch/gem5
 ./build/ARM/gem5.opt -d fs_results/canneal configs/example/arm/starter_fs.py --cpu="hpi" --num-cores=1 --disk-image=$M5_PATH/disks/expanded-linaro-minimal-aarch64.img --script=../arm-gem5-rsk/parsec_rcs/canneal_simsmall_4.rcS
+```
+## Running Final Project
+```
+# Experiment 1
+bash gen_rcs.sh -i simsmall -p canneal -n 4 
+./build/ARM/gem5.opt -d fs_results/canneal /home/mschiappa/Desktop/comparch/gem5/configs/example/arm/modified_fs_bigLITTLE.py --cpu=exynos --little-cpus=4 --last-cache-level=3 --disk=$M5_PATH/disks/expanded-linaro-minimal-aarch64.img --bootscript=../arm-gem5-rsk/parsec_rcs/canneal_simsmall_4.rcS
 ```
