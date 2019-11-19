@@ -1,2 +1,11 @@
+#Benchmark: Default everything cept big and little cpus
+./build/ARM/gem5.opt -d fs_results/canneal_exp0_run1 /home/mschiappa/Desktop/comparch/gem5/configs/example/arm/fs_bigLITTLE.py --kernel=vmlinux.vexpress_gem5_v1_64.20170616 --caches --little-cpus=4 --big-cpus=2  --cpu-type=exynos --disk=$M5_PATH/disks/expanded-linaro-minimal-aarch64.img --bootscript=../arm-gem5-rsk/parsec_rcs/canneal_simsmall_8.rcS
+./build/ARM/gem5.opt -d fs_results/canneal_exp0_run2 /home/mschiappa/Desktop/comparch/gem5/configs/example/arm/fs_bigLITTLE.py --kernel=vmlinux.vexpress_gem5_v1_64.20170616 --caches --little-cpus=4 --big-cpus=2 --cpu-type=exynos --disk=$M5_PATH/disks/expanded-linaro-minimal-aarch64.img --bootscript=../arm-gem5-rsk/parsec_rcs/canneal_simsmall_8.rcS
+
 # Experiment 1
-modified_fs_bigLittle.py --caches True --cpu exynos --little-cpus 4 --last-cache-level 3
+./build/ARM/gem5.opt -d fs_results/canneal_exp1_run1 /home/mschiappa/Desktop/comparch/gem5/configs/example/arm/modified_fs_bigLITTLE.py --cpu-type=exynos --little-cpus=4 --big-cpus=2  --disk=$M5_PATH/disks/expanded-linaro-minimal-aarch64.img --bootscript=../arm-gem5-rsk/parsec_rcs/canneal_simsmall_8.rcS
+./build/ARM/gem5.opt -d fs_results/canneal_exp1_run2 /home/mschiappa/Desktop/comparch/gem5/configs/example/arm/modified_fs_bigLITTLE.py --cpu-type=exynos --little-cpus=4 --big-cpus=2  --disk=$M5_PATH/disks/expanded-linaro-minimal-aarch64.img --bootscript=../arm-gem5-rsk/parsec_rcs/canneal_simsmall_8.rcS
+
+# Experiment 2
+./build/ARM/gem5.opt -d fs_results/canneal_exp2_run1 /home/mschiappa/Desktop/comparch/gem5/configs/example/arm/modified_fs_bigLITTLE.py --cpu-type=exynos --little-cpus=4 --big-cpus=2 --disk=$M5_PATH/disks/expanded-linaro-minimal-aarch64.img --bootscript=../arm-gem5-rsk/parsec_rcs/canneal_simsmall_8.rcS
+./build/ARM/gem5.opt -d fs_results/canneal_exp2_run2 /home/mschiappa/Desktop/comparch/gem5/configs/example/arm/modified_fs_bigLITTLE.py --cpu-type=exynos --little-cpus=4 --big-cpus=2 --disk=$M5_PATH/disks/expanded-linaro-minimal-aarch64.img --bootscript=../arm-gem5-rsk/parsec_rcs/canneal_simsmall_8.rcS
