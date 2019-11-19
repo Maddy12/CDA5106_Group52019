@@ -58,16 +58,22 @@ class L1I(L1_ICache):
     size = '48kB'
     assoc = 3
 
-
 class L1D(L1_DCache):
     tag_latency = 2
     data_latency = 2
     response_latency = 1
     mshrs = 16
     tgts_per_mshr = 16
-    size = '32kB'
-    assoc = 2
     write_buffers = 16
+    ## Experiment 0 ##
+    # size = '32kB'
+    # assoc = 2
+    ## Experiment 1 ##
+    size = '32kB'
+    assoc = 8
+    ## Experiment 2 ##
+    # size = "16kB"
+    # assoc = 8
 
 
 class WalkCache(PageTableWalkerCache):
@@ -76,9 +82,13 @@ class WalkCache(PageTableWalkerCache):
     response_latency = 4
     mshrs = 6
     tgts_per_mshr = 8
-    size = '1kB'
-    assoc = 8
+    size = '1kB' 
     write_buffers = 16
+    ## Experiment 0 and 1 ##
+    assoc = 4
+    ## Experiment 2 ##
+    # assoc = 8
+   
 
 
 class L2(L2Cache):
@@ -87,18 +97,20 @@ class L2(L2Cache):
     response_latency = 5
     mshrs = 32
     tgts_per_mshr = 8
-    size = '1MB'
-    assoc = 16
     write_buffers = 8
     clusivity='mostly_excl'
-    def __init__(self, size, assoc):
-        super(L2, self).__init__()
-        self.size = size
-        self.assoc = assoc
-
+    ## Experiment 0 ##
+    # size = '1MB'
+    # assoc = 16
+    ## Experiment 1 ##
+    size = '256kB'
+    assoc = 8
+    ## Experiment 2 ##
+    # size = "128kB"
+    # assoc = 8
 
 class L3(Cache):
-    size = '16MB'
+    size = '8MB'
     assoc = 16
     tag_latency = 20
     data_latency = 20
@@ -287,7 +299,7 @@ class SimpleSystem(LinuxArmSystem):
         if last_cache_level > 2:
             max_clock_cluster = max(self._clusters,
                                     key=lambda c: c.clk_domain.clock[0])
-            self.l3 = L3(clk_domain=max_clock_cluster.clk_domain)
+            self.l3 = L3(clk_domain=max_clock_cluster.clk_domain)  ### This needs to be fixed ## 
             self.toL3Bus = L2XBar(width=64)
             self.toL3Bus.master = self.l3.cpu_side
             self.l3.mem_side = self.membus.slave
